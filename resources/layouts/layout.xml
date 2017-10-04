@@ -1,0 +1,6 @@
+<layout id="WatchFace">
+	<drawable id="Clock" class="Clock"/>
+    <drawable id="ChartPanel" class="ChartPanel"/>
+    <drawable id="StatusBar" class="StatusBar"/>
+    <drawable id="StepsBar" class="StepsBar"/>           
+</layout>

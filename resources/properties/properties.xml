@@ -1,0 +1,15 @@
+<properties>
+    <property id="appVersion" type="string">2.2.0</property>
+    <property id="ShowAmPm" type="boolean">false</property>
+    <property id="ShowSeconds" type="boolean">false</property>
+    <property id="Graph1Type" type="number">4</property>    
+    <property id="Graph2Type" type="number">1</property>
+    <property id="Graph3Type" type="number">0</property>
+    <property id="DurationDefault" type="number">4</property>
+    <property id="DurationPressure" type="number">6</property>
+	<property id="GraphStyle" type="number">0</property>
+	<property id="ColorElevation" type="number">-1</property>
+	<property id="ColorPressure" type="number">-1</property>
+	<property id="DarkSkyApiKey" type="string"></property>
+    <property id="ShowDebugInfo" type="boolean">false</property>
+</properties>

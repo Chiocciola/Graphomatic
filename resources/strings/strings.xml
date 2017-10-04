@@ -1,0 +1,47 @@
+<strings>
+    <string id="AppName">Graphomatic</string>
+    
+    <string id="AppVersionTitle">Version</string>
+    
+    <string id="Graph1TypeTitle">Graph 1</string>
+    <string id="Graph2TypeTitle">Graph 2</string>
+    <string id="Graph3TypeTitle">Graph 3</string>
+                
+    <string id="GraphTypeVal0">None</string>
+	<string id="GraphTypeVal1">HR</string>
+    <string id="GraphTypeVal2">Elevation</string>
+    <string id="GraphTypeVal3">Pressure</string>
+    <string id="GraphTypeVal4">Weather</string>
+        
+    <string id="ShowAmPm">Show AM/PM</string>
+    <string id="ShowSeconds">Show seconds</string>
+     
+    <string id="DurationDefaultTitle">HR and Elevation graphs duration</string>
+    <string id="DurationPressureTitle">Pressure graph duration</string>
+    <string id="Duration0">Same as HR</string>
+    <string id="Duration30">30 mins</string>
+    <string id="Duration1">1 hour</string>
+    <string id="Duration2">2 hours</string>
+    <string id="Duration3">3 hours</string>        
+    <string id="Duration4">4 hours</string>     
+    <string id="Duration6">6 hours</string>   
+      
+    <string id="GraphStyleTitle">Graph style</string> 
+    <string id="Style0">Fill + Outline</string>
+    <string id="Style1">Fill</string>   
+    <string id="Style2">Outline</string>   
+
+	<string id="ColorElevationTitle">Color of Elevation graph</string>
+	<string id="ColorPressureTitle">Color of Pressure graph</string>
+
+	<string id="ColorDefault">Default Gray</string>
+	<string id="Color2">Blue</string>
+	<string id="Color3">Green</string>
+	<string id="Color4">Yellow</string>
+	<string id="Color5">Red</string>
+	
+	<string id="DarkSkyApiKey">DarkSky.net secret key</string>
+	
+    <string id="ShowDebugInfoTitle">Show Debug Info</string>
+    
+</strings>

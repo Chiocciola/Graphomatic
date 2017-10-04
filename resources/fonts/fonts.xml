@@ -1,0 +1,5 @@
+<fonts>
+    <font id="SF70" filename="SFC70.fnt" antialias="true" />
+	<font id="SF64" filename="SFC64.fnt" antialias="true" />    
+    <!--font id="SF16" filename="SFC24.fnt" antialias="true" /-->    
+</fonts>

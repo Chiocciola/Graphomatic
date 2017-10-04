@@ -1,0 +1,97 @@
+<settings>
+
+    <setting propertyKey="@Properties.appVersion" title="@Strings.AppVersionTitle">
+        <settingConfig type="alphaNumeric" readonly="true" />
+    </setting>
+
+    <setting propertyKey="@Properties.Graph1Type" title="@Strings.Graph1TypeTitle">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
+            <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
+            <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
+            <listEntry value="4">@Strings.GraphTypeVal4</listEntry>  
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.Graph2Type" title="@Strings.Graph2TypeTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.GraphTypeVal0</listEntry>
+            <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
+            <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
+            <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
+            <listEntry value="4">@Strings.GraphTypeVal4</listEntry>  
+        </settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.Graph3Type" title="@Strings.Graph3TypeTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.GraphTypeVal0</listEntry>
+            <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
+            <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
+            <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
+            <listEntry value="4">@Strings.GraphTypeVal4</listEntry> 
+        </settingConfig>
+    </setting>    
+
+    <setting propertyKey="@Properties.ShowAmPm" title="@Strings.ShowAmPm">
+        <settingConfig type="boolean" />
+    </setting>
+    
+    <setting propertyKey="@Properties.ShowSeconds" title="@Strings.ShowSeconds">
+        <settingConfig type="boolean" />
+    </setting>    
+
+	<setting propertyKey="@Properties.DurationDefault" title="@Strings.DurationDefaultTitle">
+        <settingConfig type="list">
+			<listEntry value="30">@Strings.Duration30</listEntry>
+			<listEntry value="1">@Strings.Duration1</listEntry>
+			<listEntry value="2">@Strings.Duration2</listEntry>
+            <listEntry value="3">@Strings.Duration3</listEntry>
+            <listEntry value="4">@Strings.Duration4</listEntry>              
+        </settingConfig>
+    </setting> 
+    
+	<setting propertyKey="@Properties.DurationPressure" title="@Strings.DurationPressureTitle">
+        <settingConfig type="list">
+			<listEntry value="0">@Strings.Duration0</listEntry>
+            <listEntry value="4">@Strings.Duration4</listEntry>
+            <listEntry value="6">@Strings.Duration6</listEntry>              
+        </settingConfig>
+    </setting> 
+    
+	<setting propertyKey="@Properties.GraphStyle" title="@Strings.GraphStyleTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Style0</listEntry>
+            <listEntry value="1">@Strings.Style1</listEntry>
+            <listEntry value="2">@Strings.Style2</listEntry>             
+        </settingConfig>
+    </setting>        
+
+	<setting propertyKey="@Properties.ColorElevation" title="@Strings.ColorElevationTitle">
+        <settingConfig type="list">
+            <listEntry value="-1">@Strings.ColorDefault</listEntry>
+            <listEntry value="2">@Strings.Color2</listEntry>
+            <listEntry value="3">@Strings.Color3</listEntry>  
+            <listEntry value="4">@Strings.Color4</listEntry>
+            <listEntry value="5">@Strings.Color5</listEntry>             
+        </settingConfig>
+    </setting>
+    
+   	<setting propertyKey="@Properties.ColorPressure" title="@Strings.ColorPressureTitle">
+        <settingConfig type="list">
+            <listEntry value="-1">@Strings.ColorDefault</listEntry>
+            <listEntry value="2">@Strings.Color2</listEntry>
+            <listEntry value="3">@Strings.Color3</listEntry>  
+            <listEntry value="4">@Strings.Color4</listEntry>
+            <listEntry value="5">@Strings.Color5</listEntry>             
+        </settingConfig>
+    </setting>
+    
+   	<setting propertyKey="@Properties.DarkSkyApiKey" title="@Strings.DarkSkyApiKey">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
+        
+    <setting propertyKey="@Properties.ShowDebugInfo" title="@Strings.ShowDebugInfoTitle">
+        <settingConfig type="boolean" />
+    </setting>
+</settings>

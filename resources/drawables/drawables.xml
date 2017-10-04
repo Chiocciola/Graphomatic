@@ -1,0 +1,74 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" dithering="none"/>
+    
+    <bitmap id="BluetoothIcon" filename="Bluetooth.png"  dithering="none">
+        <palette disableTransparency="true">
+            <color>000000</color>
+            <color>555555</color>
+            <color>AAAAAA</color>
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="AlarmClockIcon" filename="AlarmClock.png"  dithering="none">
+        <palette disableTransparency="true">
+            <color>000000</color>
+            <color>555555</color>
+            <color>AAAAAA</color>
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="MoonIcon" filename="Moon.png"  dithering="none">
+        <palette disableTransparency="true">
+            <color>000000</color>
+            <color>555555</color>
+            <color>AAAAAA</color>
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="NotificationIcon" filename="Notification.png"  dithering="none">
+    	<palette disableTransparency="true">
+            <color>000000</color>
+            <color>555555</color>
+            <color>AAAAAA</color>
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="GpsIcon" filename="GPS.png"  dithering="none">
+    	<palette disableTransparency="true">
+            <color>FFFFFF</color>
+            <color>FF0000</color>
+        </palette>
+    </bitmap>
+    <bitmap id="BtRedIcon" filename="BluetoothRed.png"  dithering="none">
+    	<palette disableTransparency="true">
+            <color>FFFFFF</color>
+            <color>FFAAAA</color>
+            <color>FF5555</color>
+            <color>FF0000</color>
+        </palette>
+    </bitmap>    
+    <bitmap id="SyncIcon" filename="Sync.png"  dithering="none">
+    	<palette disableTransparency="true">
+            <color>FFFFFF</color>
+            <color>FFAAAA</color>
+            <color>FF5555</color>
+            <color>FF0000</color>
+        </palette>
+    </bitmap>
+    <bitmap id="KeyIcon" filename="Key.png"  dithering="none">
+    	<palette disableTransparency="true">
+            <color>FFFFFF</color>
+            <color>FFAAAA</color>
+            <color>FF5555</color>
+            <color>FF0000</color>
+        </palette>
+    </bitmap>
+    <bitmap id="WaitIcon" filename="Wait.png"  dithering="none">
+    	<palette disableTransparency="true">
+            <color>000000</color>
+            <color>555555</color>
+            <color>AAAAAA</color>
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>            
+</drawables>
