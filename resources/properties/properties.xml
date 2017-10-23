@@ -1,5 +1,5 @@
 <properties>
-    <property id="appVersion" type="string">2.2.0</property>
+    <property id="appVersion" type="string">2.3.0</property>
     <property id="ShowAmPm" type="boolean">false</property>
     <property id="ShowSeconds" type="boolean">false</property>
     <property id="Graph1Type" type="number">4</property>    

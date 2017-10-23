@@ -16,8 +16,7 @@ class WeatherService extends Toybox.System.ServiceDelegate
         {
             Background.exit(null);
         }/**/
-    
-    
+        
         if (!System.getDeviceSettings().phoneConnected)
         {
             //Background.exit(Weather.ER_NO_CONNECTION);
@@ -35,8 +34,8 @@ class WeatherService extends Toybox.System.ServiceDelegate
         
         //System.println("Current Location: " + latlng );
         
-        var darkSkyApiKey = app.getProperty(Graphomatic.darkSkyApiKey);
-        //var darkSkyApiKey = "1cbbfb780a7ada23c39be9ae9871754a";        
+        //var darkSkyApiKey = app.getProperty(Graphomatic.darkSkyApiKey);
+        var darkSkyApiKey = "1cbbfb780a7ada23c39be9ae9871754a";        
 
         if (darkSkyApiKey == null || darkSkyApiKey.length() == 0)
         {          

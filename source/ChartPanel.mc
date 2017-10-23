@@ -156,9 +156,9 @@ class ChartPanel extends Toybox.WatchUi.Drawable
             chartHeight[0] = 117;
         }
         
-        if (chartType[0] == Graphomatic.WEATHER && chartCount == 2)
+        if (chartType[0] == Graphomatic.WEATHER && chartCount <= 2)
         {
-            chartPos[0] = 76;
+            chartPos[0] = 79;
             chartHeight[0] = 60;
         }
                                                                           
@@ -207,12 +207,14 @@ class ChartPanel extends Toybox.WatchUi.Drawable
                             
             chart.draw(dcBuf, 0);
         }
-        
+                        
         if (chart.buffer != null)
         {
-            dc.drawBitmap(0, y, chart.buffer);
+            dc.drawBitmap(0, y + chart.bufferOffset, chart.buffer);
             chart.drawOverlay(dc, y);
         }
+        
+        //dc.drawRectangle(0, y, chart.width, chart.height);        
     }
         
     function drawChart(dc, chart, y, historyProvider, unitScale, unit, hours, fullDraw, color)
@@ -240,11 +242,13 @@ class ChartPanel extends Toybox.WatchUi.Drawable
         
             chart.curr = historyProvider.invoke(options).next();
         }      
-                        
+                                
         if (chart.buffer != null)
         {
             dc.drawBitmap(0, y, chart.buffer);
             chart.drawOverlay(dc, y, unitScale, unit);
         }
+        
+        //dc.drawRectangle(0, y, chart.width, chart.height);
     }
 }

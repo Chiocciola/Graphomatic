@@ -138,7 +138,7 @@ class Chart
                         
         for (var sample = curr; sample != null; sample = histIterator.next())
         {
-            var x = ((width - 1) - (drawTime.value() - sample.when.value()) / dX).toLong(); 
+            var x = (width - (drawTime.value() - sample.when.value()) / dX).toLong(); 
             
             if (x < 0)
             {
@@ -230,10 +230,10 @@ class Chart
 //        }
         
         //
-        while (lastSampledTime.add(sampleRate).lessThan(drawTime))
-        {
-            lastSampledTime = lastSampledTime.add(sampleRate);
-        }
+//        while (lastSampledTime.add(sampleRate).lessThan(drawTime))
+//        {
+//            lastSampledTime = lastSampledTime.add(sampleRate);
+//        }
         
         var yBottom = posY + chartHeight - 1;        
         
@@ -343,7 +343,11 @@ class Chart
         // Current value        
         var currStr = "n/a";
     
-        if (   curr != null            
+        if (type == Graphomatic.HR && Activity.getActivityInfo().currentHeartRate != null)
+        {       
+            currStr = (Activity.getActivityInfo().currentHeartRate * unitsScale).toLong().toString() + unit;
+        }    
+        else if (   curr != null            
             && curr.data != null)
         {
             currStr = (curr.data * unitsScale).toLong().toString() + unit;          

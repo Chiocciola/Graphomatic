@@ -20,7 +20,7 @@ class WatchFaceTestApp extends Toybox.Application.AppBase
 
     function getInitialView()
     {            
-        if (getProperty("Reset") != 2)
+        /*if (getProperty("Reset") != 2)
         {
             var darkSkyApiKey = getProperty(Graphomatic.darkSkyApiKey);
             
@@ -28,6 +28,7 @@ class WatchFaceTestApp extends Toybox.Application.AppBase
             setProperty("Reset", 2);
             setProperty(Graphomatic.darkSkyApiKey, darkSkyApiKey);
         }
+        */
     
         //Background.registerForTemporalEvent(Weather.FIVE_MINUTES);
     

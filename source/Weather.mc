@@ -43,6 +43,20 @@ module Weather
        10 => Toybox.Graphics.COLOR_BLUE     // "snow"        
     };
     
+    const Icons = {
+        0 => null,
+        1 => Ui.loadResource(Rez.Drawables.ClearDay),   // "clear-day"
+        2 => Ui.loadResource(Rez.Drawables.ClearNight), // "clear-night"
+        3 => Ui.loadResource(Rez.Drawables.Wind),       // "wind"
+        4 => Ui.loadResource(Rez.Drawables.Fog),        // "fog"
+        5 => Ui.loadResource(Rez.Drawables.PartlyCloudyDay),  // "partly-cloudy-day"
+        6 => Ui.loadResource(Rez.Drawables.PartlyCloudyNight), // "partly-cloudy-night"       
+        7 => Ui.loadResource(Rez.Drawables.Cloudy),     // "cloudy"        
+        8 => Ui.loadResource(Rez.Drawables.Rain),       // "rain"
+        9 => Ui.loadResource(Rez.Drawables.Snow),       // "sleet"        
+       10 => Ui.loadResource(Rez.Drawables.Snow)        // "snow"        
+    };
+
     function charTypeIsActive(chartType) 
     {
         var app = Toybox.Application.getApp();
@@ -99,7 +113,7 @@ module Weather
 
                 case ER_OK:
                     var lastTime = Background.getLastTemporalEventTime();
-                    trigger = lastTime == null || Time.now().subtract(lastTime).value() > ONE_HOUR.value();
+                    trigger = lastTime == null || Time.now().value() - lastTime.value() > ONE_HOUR.value();
                     break;
             
                 case ER_NO_CONNECTION:

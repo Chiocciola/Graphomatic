@@ -13,22 +13,23 @@ class WeatherChartModel
 
 class WeatherChart
 {
-
     //const linePos = 0;
     //const timePos = 0;
     //const tempPos = 16;
     //const locaPos = 37;
 
-    const locaPos = -4;
-    var linePos = 16;        
-    var timePos = 17;
-    var tempPos = 32;
+    const locaPos = -5;
+    var iconPos = 10;
+    var linePos = 15;            
+    var timePos = 18;
+    var tempPos = 33;
     
     var type;
     var width; 
     var height; 
     
     var buffer;
+    var bufferOffset = 0;
     
     var drawnDataTime;
     var drawnHourTime;
@@ -36,6 +37,8 @@ class WeatherChart
     var drawnStatus;
        
     var drawCounter = 0;
+    
+    var iconMode = true;
 
     function initialize (type, width, height)
     {
@@ -43,13 +46,26 @@ class WeatherChart
         self.width = width;
         self.height = height;
         
+        iconMode = height >= 60;
+        
+        if (iconMode)        
+        {
+            linePos = iconPos;
+        }
+               
+        var options = {:width => width, :height => height - linePos};
+        buffer = new Graphics.BufferedBitmap(options); 
+        
+        bufferOffset = linePos;
+              
+        timePos -= linePos;
+        tempPos -= linePos;
+        linePos -= linePos;
+        
         var extraHeight = height - 55;                     
         linePos += extraHeight;
         timePos += extraHeight;
-        tempPos += extraHeight;
-       
-        var options = {:width => width, :height => height};
-        buffer = new Graphics.BufferedBitmap(options);    
+        tempPos += extraHeight;           
     }  
 
     function isUpdateNeeded()
@@ -95,33 +111,10 @@ class WeatherChart
         var model = getModel();
         
         drawWeather(dc, pos, model);
-        
-        if (model.communicationError == null || model.location == null)
-        {
-            drawCounter++;
-            drawLocation(dc, pos, model);
-            model = null;
-        }
     }
     
     function drawOverlay(dc, pos)
     {    
-        if (Application.getApp().getProperty("ShowDebugInfo"))
-        {
-            //var status = Application.getApp().getProperty(Weather.STATUS);            
-            //dc.drawText(0, pos - 4, Graphics.FONT_TINY, status, Graphics.TEXT_JUSTIFY_LEFT);
-        
-            var time = Application.getApp().getProperty(Weather.TIME);        
-            var l = time == null ? 0 : (Time.now().value() - time) / 60;
-                
-            dc.drawLine(0, pos - 2, l, pos  - 2);
-            
-            time = Background.getLastTemporalEventTime();            
-            l = time == null ? 0 : Time.now().subtract(time).value() / 60;
-            
-            dc.drawLine(0, pos - 1, l, pos  - 1);            
-        }
-                    
         var model = getModel();
 
         if (model.status != null)
@@ -131,31 +124,26 @@ class WeatherChart
             switch (model.status)
             {
                 case Weather.ER_WAIT:
-                    dc.drawBitmap(x - 15, pos + 1, Weather.WaitIcon);
+                    dc.drawBitmap(x - 14, pos, Weather.WaitIcon);
                     break;
                     
                 case Weather.ER_NO_CONNECTION:
-                    dc.drawBitmap(x - 15, pos + 1, Weather.BtRedIcon);
+                    dc.drawBitmap(x - 14, pos, Weather.BtRedIcon);
                     break;
                     
                 case Weather.ER_NO_SYNC:
-                    dc.drawBitmap(x - 15, pos + 1, Weather.SyncIcon);
+                    dc.drawBitmap(x - 14, pos, Weather.SyncIcon);
                     break;                    
                     
                 case Weather.ER_NO_GPS:
-                    dc.drawBitmap(x - 15, pos + 1, Weather.GpsIcon);
+                    dc.drawBitmap(x - 14, pos, Weather.GpsIcon);
                     break;
                     
                 case Weather.ER_NO_DARKSKYKEY:
-                    dc.drawBitmap(x - 15, pos + 1, Weather.KeyIcon);
+                    dc.drawBitmap(x - 14, pos, Weather.KeyIcon);
                     break;
             }
-        }
-                    
-        if (model.communicationError == null || model.location == null)
-        {
-            return;
-        }
+        } 
 
         drawCounter++;
         drawLocation(dc, pos, model);
@@ -269,13 +257,13 @@ class WeatherChart
             }
 
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
-            dc.drawText(16 + j * 19, pos + tempPos, Graphics.FONT_MEDIUM, t, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText((j + 1) * 18.5, pos + tempPos, Graphics.FONT_MEDIUM, t, Graphics.TEXT_JUSTIFY_CENTER);
             
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);
-            dc.drawText(16 + j * 19, pos + timePos, Graphics.FONT_TINY, h, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText((j + 1) * 18.5, pos + timePos, Graphics.FONT_TINY, h, Graphics.TEXT_JUSTIFY_CENTER);
         }        
             
-        for (var j = 0; j < 7; j = j + 1)
+        for (var j = 0; j <= 7; j = j + 1)
         {
             if (model.startIndex + j >= model.h.size())
             {
@@ -283,26 +271,30 @@ class WeatherChart
             }
         
             var icon = model.i[model.startIndex + j];
-            
-            dc.setColor( Weather.Colors[icon], Graphics.COLOR_BLACK);
-            
-            var x1 = 16 + j * 19; if (j == 0) { x1 = 0; }
-            var x2 = 35 + j * 19;
+        
+            if (iconMode)
+            {                        
+                var x = j * 18.5;
+                dc.drawBitmap(x, pos + linePos, Weather.Icons[icon]);
+                continue;
+            }
+                     
+            var x1 = (j    ) * 18.5;
+            var x2 = (j + 1) * 18.5;
 
+            dc.setColor( Weather.Colors[icon], Graphics.COLOR_BLACK);
             dc.drawLine(x1, pos + linePos + 0, x2, pos + linePos + 0);
             dc.drawLine(x1, pos + linePos + 1, x2, pos + linePos + 1);
-            
+            dc.drawLine(x1, pos + linePos + 2, x2, pos + linePos + 2);
+                        
             if (j % 2 == 0)
             {
-                dc.drawLine(x1,     pos + linePos + 2, x1,     pos + linePos + 5);
-                //dc.drawLine(x1 + 1, pos + linePos + 2, x1 + 1, pos + linePos + 5);
+                dc.drawLine(x1,     pos + linePos + 3, x1,     pos + linePos + 6);
             }
             else
             {
-                dc.drawLine(x1, pos + linePos + 2, x1, pos + linePos + 4);
+                dc.drawLine(x1,     pos + linePos + 3, x1,     pos + linePos + 4);
             }
-                        
-            //dc.drawLine(x1, pos + linePos + 2, 35 + j * 19, pos + linePos + 2);                                 
         }        
     }    
 }

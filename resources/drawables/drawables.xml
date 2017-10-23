@@ -70,5 +70,15 @@
             <color>AAAAAA</color>
             <color>FFFFFF</color>
         </palette>
-    </bitmap>            
+    </bitmap> 
+    
+    <bitmap id="ClearDay"          filename="ClearDay.png"          dithering="none"/>
+    <bitmap id="ClearNight"        filename="ClearNight.png"        dithering="none"/>
+    <bitmap id="PartlyCloudyDay"   filename="PartlyCloudyDay.png"   dithering="none"/>
+    <bitmap id="PartlyCloudyNight" filename="PartlyCloudyNight.png" dithering="none"/>
+    <bitmap id="Cloudy"            filename="Cloudy.png"            dithering="none"/>
+    <bitmap id="Wind"              filename="Wind.png" dithering="none"/>
+    <bitmap id="Rain"              filename="Rain.png" dithering="none"/>
+    <bitmap id="Snow"              filename="Snow.png" dithering="none"/>
+    <bitmap id="Fog"               filename="Fog.png" dithering="none"/>           
 </drawables>
