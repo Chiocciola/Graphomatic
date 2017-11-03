@@ -1,20 +1,22 @@
 # Changelog
 
 ## [2.3.0]
-• Weather: icons. Enabled when 1st graph in Single or Dual mode
+### Added
+- Weather: icons. Enabled when 1st graph in Single or Dual mode
 
 ## [2.2.0]
-• Weather: improved error handling
-• Weather: new icons that explains why the forecast is not updating (no GPS coordinates, missing connection to Garmin Connect, Garmin Connect is not responding, missing API key).
-• Hide and show watch face in order to retry connection (Goto any widget or system menu and then comeback)
-• Added 30 minutes option to chart duration as per Ervin's request.
+- Weather: improved error handling
+- Weather: new icons that explains why the forecast is not updating (no GPS coordinates, missing connection to Garmin Connect, Garmin Connect is not responding, missing API key).
+- Hide and show watch face in order to retry connection (Goto any widget or system menu and then comeback)
+- Added 30 minutes option to chart duration as per Ervin's request.
 
 ## [2.1.1]
-• Fixed bug that caused updating of the forecast too often
+### Changed
+- Fixed bug that caused updating of the forecast too often
 
 ## [2.1.0]
-• Improved battery life
-• New layout options (selectable 1st graph).
+- Improved battery life
+- New layout options (selectable 1st graph).
 
 ## [2.0.1]
 • Triple graph visualization bug is fixed.
