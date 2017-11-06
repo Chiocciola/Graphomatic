@@ -1,33 +1,33 @@
 # Changelog
 
-## [2.3.0]
+## [2.3.0] - 2017-10-16
 ### Added
 - Weather: icons. Enabled when 1st graph in Single or Dual mode
 
-## [2.2.0]
+## [2.2.0] - 2017-09-27
 - Weather: improved error handling
 - Weather: new icons that explains why the forecast is not updating (no GPS coordinates, missing connection to Garmin Connect, Garmin Connect is not responding, missing API key).
 - Hide and show watch face in order to retry connection (Goto any widget or system menu and then comeback)
 - Added 30 minutes option to chart duration as per Ervin's request.
 
-## [2.1.1]
+## [2.1.1] - 2017-09-20
 ### Changed
 - Fixed bug that caused updating of the forecast too often
 
-## [2.1.0]
+## [2.1.0] - 2017-09-18
 - Improved battery life
 - New layout options (selectable 1st graph).
 
-## [2.0.1]
-• Triple graph visualization bug is fixed.
+## [2.0.1] - 2017-09-07
+- Triple graph visualization bug is fixed.
 
-## [2.0.0]
-• Weather forecast. Register at DarkSky.net as developer and enter the key in app's settings. Give 5 minutes to communication process to apply the changes.
+## [2.0.0] - 2017-09-06
+- Weather forecast. Register at DarkSky.net as developer and enter the key in app's settings. Give 5 minutes to communication process to apply the changes.
 
 ## [1.0.12]
-• Font tweaks.
-• Min/Max marks are white for red graphs (works for HR too).
-• Y-axes are drawn in front of a graph.
+- Font tweaks.
+- Min/Max marks are white for red graphs (works for HR too).
+- Y-axes are drawn in front of a graph.
 
 ## [1.0.11]
 - Meters/feet setting for altitude graph.
