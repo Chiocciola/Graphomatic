@@ -34,13 +34,15 @@ class WeatherService extends Toybox.System.ServiceDelegate
         
         //System.println("Current Location: " + latlng );
         
-        //var darkSkyApiKey = app.getProperty(Graphomatic.darkSkyApiKey);
-        var darkSkyApiKey = "1cbbfb780a7ada23c39be9ae9871754a";        
+        var darkSkyApiKey = app.getProperty(Graphomatic.darkSkyApiKey);
+                
 
         if (darkSkyApiKey == null || darkSkyApiKey.length() == 0)
         {          
             //Background.exit(Weather.ER_NO_DARKSKYKEY);
-            Background.exit(3);
+            //Background.exit(3);
+            
+            darkSkyApiKey = "1cbbfb780a7ada23c39be9ae9871754a";
         }
                 
         Communications.makeWebRequest(
