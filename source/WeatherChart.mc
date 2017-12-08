@@ -1,3 +1,6 @@
+using Toybox.Application.Storage;
+using Toybox.WatchUi as Ui;
+
 class WeatherChartModel
 {
     var status;
@@ -13,13 +16,8 @@ class WeatherChartModel
 
 class WeatherChart
 {
-    //const linePos = 0;
-    //const timePos = 0;
-    //const tempPos = 16;
-    //const locaPos = 37;
-
     const locaPos = -5;
-    var iconPos = 10;
+    const iconPos = 10;
     var linePos = 15;            
     var timePos = 18;
     var tempPos = 33;
@@ -39,6 +37,28 @@ class WeatherChart
     var drawCounter = 0;
     
     var iconMode = true;
+    
+    const Colors = [
+        Toybox.Graphics.COLOR_BLACK,
+        Toybox.Graphics.COLOR_YELLOW,  // "clear-day"
+        Toybox.Graphics.COLOR_WHITE,   // "clear-night"
+        Toybox.Graphics.COLOR_LT_GRAY, // "wind"
+        Toybox.Graphics.COLOR_DK_GRAY, // "fog"
+        Toybox.Graphics.COLOR_DK_GRAY, // "partly-cloudy-day"
+        Toybox.Graphics.COLOR_DK_GRAY, // "partly-cloudy-night"       
+        Toybox.Graphics.COLOR_DK_GRAY, // "cloudy"        
+        Toybox.Graphics.COLOR_BLUE,    // "rain"
+        Toybox.Graphics.COLOR_BLUE,    // "sleet"        
+        Toybox.Graphics.COLOR_BLUE     // "snow"        
+    ];
+    
+    var Icons;   
+
+    const GpsIcon   = Ui.loadResource(Rez.Drawables.GpsIcon);
+    const BtRedIcon = Ui.loadResource(Rez.Drawables.BtRedIcon);
+    const KeyIcon   = Ui.loadResource(Rez.Drawables.KeyIcon);
+    const SyncIcon  = Ui.loadResource(Rez.Drawables.SyncIcon);
+    const WaitIcon  = Ui.loadResource(Rez.Drawables.WaitIcon);
 
     function initialize (type, width, height)
     {
@@ -51,28 +71,41 @@ class WeatherChart
         if (iconMode)        
         {
             linePos = iconPos;
+ 			Icons = [
+		        null,
+		        Ui.loadResource(Rez.Drawables.ClearDay),   // "clear-day"
+		        Ui.loadResource(Rez.Drawables.ClearNight), // "clear-night"
+		        Ui.loadResource(Rez.Drawables.Wind),       // "wind"
+		        Ui.loadResource(Rez.Drawables.Fog),        // "fog"
+		        Ui.loadResource(Rez.Drawables.PartlyCloudyDay),  // "partly-cloudy-day"
+		        Ui.loadResource(Rez.Drawables.PartlyCloudyNight), // "partly-cloudy-night"       
+		        Ui.loadResource(Rez.Drawables.Cloudy),     // "cloudy"        
+		        Ui.loadResource(Rez.Drawables.Rain),       // "rain"
+		        Ui.loadResource(Rez.Drawables.Snow),       // "sleet"        
+		        Ui.loadResource(Rez.Drawables.Snow)        // "snow"        
+		    ];             
         }
                
-        var options = {:width => width, :height => height - linePos};
-        buffer = new Graphics.BufferedBitmap(options); 
-        
-        bufferOffset = linePos;
-              
-        timePos -= linePos;
-        tempPos -= linePos;
-        linePos -= linePos;
-        
         var extraHeight = height - 55;                     
         linePos += extraHeight;
         timePos += extraHeight;
-        tempPos += extraHeight;           
+        tempPos += extraHeight;          
+        
+        bufferOffset = linePos;
+               
+        var options = {:width => width, :height => height - bufferOffset};
+        buffer = new Graphics.BufferedBitmap(options); 
+        
+        linePos -= bufferOffset;
+        timePos -= bufferOffset;
+        tempPos -= bufferOffset;           
     }  
 
     function isUpdateNeeded()
     {    
-        var dataTime = Application.getApp().getProperty(Weather.TIME);
-        var error = Application.getApp().getProperty(Weather.ERROR);
-        var status = Application.getApp().getProperty(Weather.STATUS);
+        var dataTime = Storage.getValue(Weather.TIME);
+        var error = Storage.getValue(Weather.ERROR);
+        var status = Storage.getValue(Weather.STATUS);
     
         var now = Time.now().value();
         var hourTime = now - now % 3600;
@@ -100,13 +133,13 @@ class WeatherChart
 
     function draw(dc, pos)
     {
-        drawnDataTime = Application.getApp().getProperty(Weather.TIME);
+        drawnDataTime = Storage.getValue(Weather.TIME);
     
         var now = Time.now().value();
         drawnHourTime = now - now % 3600;            
     
-        drawnStatus = Application.getApp().getProperty(Weather.STATUS);
-        drawnError = Application.getApp().getProperty(Weather.ERROR);
+        drawnStatus = Storage.getValue(Weather.STATUS);
+        drawnError = Storage.getValue(Weather.ERROR);
             
         var model = getModel();
         
@@ -124,23 +157,23 @@ class WeatherChart
             switch (model.status)
             {
                 case Weather.ER_WAIT:
-                    dc.drawBitmap(x - 14, pos, Weather.WaitIcon);
+                    dc.drawBitmap(x - 14, pos, WaitIcon);
                     break;
                     
                 case Weather.ER_NO_CONNECTION:
-                    dc.drawBitmap(x - 14, pos, Weather.BtRedIcon);
+                    dc.drawBitmap(x - 14, pos, BtRedIcon);
                     break;
                     
                 case Weather.ER_NO_SYNC:
-                    dc.drawBitmap(x - 14, pos, Weather.SyncIcon);
+                    dc.drawBitmap(x - 14, pos, SyncIcon);
                     break;                    
                     
                 case Weather.ER_NO_GPS:
-                    dc.drawBitmap(x - 14, pos, Weather.GpsIcon);
+                    dc.drawBitmap(x - 14, pos, GpsIcon);
                     break;
                     
                 case Weather.ER_NO_DARKSKYKEY:
-                    dc.drawBitmap(x - 14, pos, Weather.KeyIcon);
+                    dc.drawBitmap(x - 14, pos, KeyIcon);
                     break;
             }
         } 
@@ -153,10 +186,10 @@ class WeatherChart
     {            
         var model = new WeatherChartModel();
         
-        model.communicationError = Application.getApp().getProperty(Weather.ERROR);
-        model.status             = Application.getApp().getProperty(Weather.STATUS);
+        model.communicationError = Storage.getValue(Weather.ERROR);
+        model.status             = Storage.getValue(Weather.STATUS);
             
-        var data = Application.getApp().getProperty(Weather.DATA1);
+        var data = Storage.getValue(Weather.DATA1);
         
         if (data == null)
         {        
@@ -275,14 +308,14 @@ class WeatherChart
             if (iconMode)
             {                        
                 var x = j * 18.5;
-                dc.drawBitmap(x, pos + linePos, Weather.Icons[icon]);
+                dc.drawBitmap(x, pos + linePos, Icons[icon]);
                 continue;
             }
                      
             var x1 = (j    ) * 18.5;
             var x2 = (j + 1) * 18.5;
 
-            dc.setColor( Weather.Colors[icon], Graphics.COLOR_BLACK);
+            dc.setColor(Colors[icon], Graphics.COLOR_BLACK);
             dc.drawLine(x1, pos + linePos + 0, x2, pos + linePos + 0);
             dc.drawLine(x1, pos + linePos + 1, x2, pos + linePos + 1);
             dc.drawLine(x1, pos + linePos + 2, x2, pos + linePos + 2);

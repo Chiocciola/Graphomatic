@@ -1,9 +1,9 @@
 using Toybox.Activity;
-using Toybox.Application;
+using Toybox.Application.Properties;
+using Toybox.Application.Storage;
 using Toybox.Background;
 using Toybox.System;
 using Toybox.Time;
-using Toybox.WatchUi as Ui;
 
 module Weather
 {
@@ -22,48 +22,12 @@ module Weather
     
     const FIVE_MINUTES = new Time.Duration(5 * 60);
     const ONE_HOUR = new Time.Duration(60 * 60);
-    
-    const GpsIcon   = Ui.loadResource(Rez.Drawables.GpsIcon);
-    const BtRedIcon = Ui.loadResource(Rez.Drawables.BtRedIcon);
-    const KeyIcon   = Ui.loadResource(Rez.Drawables.KeyIcon);
-    const SyncIcon  = Ui.loadResource(Rez.Drawables.SyncIcon);
-    const WaitIcon  = Ui.loadResource(Rez.Drawables.WaitIcon);
-    
-    const Colors = {
-        0 => Toybox.Graphics.COLOR_BLACK,
-        1 => Toybox.Graphics.COLOR_YELLOW,  // "clear-day"
-        2 => Toybox.Graphics.COLOR_WHITE,   // "clear-night"
-        3 => Toybox.Graphics.COLOR_LT_GRAY, // "wind"
-        4 => Toybox.Graphics.COLOR_DK_GRAY, // "fog"
-        5 => Toybox.Graphics.COLOR_DK_GRAY, // "partly-cloudy-day"
-        6 => Toybox.Graphics.COLOR_DK_GRAY, // "partly-cloudy-night"       
-        7 => Toybox.Graphics.COLOR_DK_GRAY, // "cloudy"        
-        8 => Toybox.Graphics.COLOR_BLUE,    // "rain"
-        9 => Toybox.Graphics.COLOR_BLUE,    // "sleet"        
-       10 => Toybox.Graphics.COLOR_BLUE     // "snow"        
-    };
-    
-    const Icons = {
-        0 => null,
-        1 => Ui.loadResource(Rez.Drawables.ClearDay),   // "clear-day"
-        2 => Ui.loadResource(Rez.Drawables.ClearNight), // "clear-night"
-        3 => Ui.loadResource(Rez.Drawables.Wind),       // "wind"
-        4 => Ui.loadResource(Rez.Drawables.Fog),        // "fog"
-        5 => Ui.loadResource(Rez.Drawables.PartlyCloudyDay),  // "partly-cloudy-day"
-        6 => Ui.loadResource(Rez.Drawables.PartlyCloudyNight), // "partly-cloudy-night"       
-        7 => Ui.loadResource(Rez.Drawables.Cloudy),     // "cloudy"        
-        8 => Ui.loadResource(Rez.Drawables.Rain),       // "rain"
-        9 => Ui.loadResource(Rez.Drawables.Snow),       // "sleet"        
-       10 => Ui.loadResource(Rez.Drawables.Snow)        // "snow"        
-    };
-
+        
     function charTypeIsActive(chartType) 
     {
-        var app = Toybox.Application.getApp();
-        
-        return app.getProperty(Graphomatic.graph1Type) == chartType
-            || app.getProperty(Graphomatic.graph2Type) == chartType
-            || app.getProperty(Graphomatic.graph3Type) == chartType;    
+        return Properties.getValue(Graphomatic.graph1Type) == chartType
+            || Properties.getValue(Graphomatic.graph2Type) == chartType
+            || Properties.getValue(Graphomatic.graph3Type) == chartType;    
     }
          
     function enableBgProc()
@@ -89,12 +53,10 @@ module Weather
     }
     
     function checkBgProcStatus()
-    {                    
-        var app =  Application.getApp();
-    
-        var status            = app.getProperty(STATUS);
-        var darkSkyApiKey     = app.getProperty(Graphomatic.darkSkyApiKey);
-        var darkSkyApiKeyPrev = app.getProperty(APIKEY);
+    {                        
+        var status            = Storage.getValue(STATUS);
+        var darkSkyApiKey     = Properties.getValue(Graphomatic.darkSkyApiKey);
+        var darkSkyApiKeyPrev = Storage.getValue(APIKEY);
 
         var trigger = false;
         
@@ -140,8 +102,8 @@ module Weather
         
         if (trigger)
         {
-            app.setProperty(APIKEY, darkSkyApiKey);
-            app.setProperty(STATUS, ER_WAIT);
+            Storage.setValue(APIKEY, darkSkyApiKey);
+            Storage.setValue(STATUS, ER_WAIT);
             triggerBgProc();
         }    
     }
@@ -152,13 +114,12 @@ module Weather
         {
             return;
         }
-    
-        var app = Application.getApp();            
+                
         var connectionError = null;
         
         if (data instanceof Toybox.Lang.Number)
         {
-            app.setProperty(STATUS, data);
+            Storage.setValue(STATUS, data);
             
             Background.deleteTemporalEvent();
             System.println("BG Process is suspended");
@@ -180,10 +141,10 @@ module Weather
         }      
         else 
         {
-            if (app.getProperty(STATUS) != ER_OK)
+            if (Storage.getValue(STATUS) != ER_OK)
             {
                 enableBgProc();
-                app.setProperty(STATUS, ER_OK);
+                Storage.setValue(STATUS, ER_OK);
             }
 
             if (data instanceof Toybox.Lang.String)
@@ -192,14 +153,14 @@ module Weather
             }        
             else
             {                           
-                app.setProperty(DATA1, data);            
-                app.setProperty(TIME, Time.now().value());
+                Storage.setValue(DATA1, data);            
+                Storage.setValue(TIME, Time.now().value());
                 
                 System.println("Weather data are available");        
                 //System.println(data);              
             }
         }
         
-        app.setProperty(Weather.ERROR, connectionError);
+        Storage.setValue(Weather.ERROR, connectionError);
     }          
 }

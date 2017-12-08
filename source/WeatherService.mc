@@ -1,3 +1,5 @@
+using Toybox.Application.Properties;
+
 (:background)
 class WeatherService extends Toybox.System.ServiceDelegate
 {
@@ -7,9 +9,7 @@ class WeatherService extends Toybox.System.ServiceDelegate
     }
 
     function onTemporalEvent()
-    {
-        var app =  Application.getApp();
-        
+    {        
         /*
         var lastTime = app.getProperty("wTime"); 
         if (lastTime != null && (Time.now().value() - lastTime) < 360)
@@ -34,7 +34,7 @@ class WeatherService extends Toybox.System.ServiceDelegate
         
         //System.println("Current Location: " + latlng );
         
-        var darkSkyApiKey = app.getProperty(Graphomatic.darkSkyApiKey);
+        var darkSkyApiKey = Properties.getValue(Graphomatic.darkSkyApiKey);
                 
 
         if (darkSkyApiKey == null || darkSkyApiKey.length() == 0)

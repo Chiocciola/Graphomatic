@@ -80,8 +80,8 @@ class StatusBar extends Ui.Drawable
         var showSeconds = !$.sleepMode && Application.getApp().getProperty(Graphomatic.showSeconds);
         var showAmPm    = !is24Hour    && Application.getApp().getProperty(Graphomatic.showAmPm);                
         
-        var timeFont   = (showSeconds || showAmPm) ? Graphics.FONT_TINY : Graphics.FONT_LARGE;
-        var timeOffset = (showSeconds || showAmPm) ?                 -4 :                  -6;        
+        var timeFont   = (showSeconds || showAmPm) ? Graphics.FONT_TINY : Graphics.FONT_TINY;
+        var timeOffset = (showSeconds || showAmPm) ?                 -4 :                  -4;        
         
         var timeString = getTimeString(showSeconds, showAmPm);                 
         var timeWidth  = dc.getTextWidthInPixels(timeString, timeFont);
