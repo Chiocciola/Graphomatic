@@ -19,16 +19,18 @@ class Clock extends Ui.Drawable
 
     function draw(dc)
     {
-        if (Application.getApp().getProperty(Graphomatic.graph2Type) != 0
-         && Application.getApp().getProperty(Graphomatic.graph3Type) != 0)
+    		var app = Application.getApp();
+    
+       if (app.getProperty(Graphomatic.graph2Type) != 0
+         && app.getProperty(Graphomatic.graph3Type) != 0)    
         {
             return;
         }
         
         var is24 = System.getDeviceSettings().is24Hour;        
         
-        var showAmPm = !is24 && Application.getApp().getProperty(Graphomatic.showAmPm);
-        var showSeconds = !$.sleepMode && Application.getApp().getProperty(Graphomatic.showSeconds);
+        var showAmPm = !is24 && app.getProperty(Graphomatic.showAmPm);
+        var showSeconds = !$.sleepMode && app.getProperty(Graphomatic.showSeconds);
         
         var small = (showAmPm || showSeconds);
         

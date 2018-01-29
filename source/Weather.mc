@@ -1,9 +1,10 @@
 using Toybox.Activity;
+using Toybox.Application;
 using Toybox.Application.Properties;
-using Toybox.Application.Storage;
 using Toybox.Background;
 using Toybox.System;
 using Toybox.Time;
+using Toybox.WatchUi;
 
 module Weather
 {
@@ -25,9 +26,11 @@ module Weather
         
     function charTypeIsActive(chartType) 
     {
-        return Properties.getValue(Graphomatic.graph1Type) == chartType
-            || Properties.getValue(Graphomatic.graph2Type) == chartType
-            || Properties.getValue(Graphomatic.graph3Type) == chartType;    
+		var app = Application.getApp();
+
+        return app.getProperty(Graphomatic.graph1Type) == chartType
+            || app.getProperty(Graphomatic.graph2Type) == chartType
+            || app.getProperty(Graphomatic.graph3Type) == chartType;    
     }
          
     function enableBgProc()
@@ -53,10 +56,12 @@ module Weather
     }
     
     function checkBgProcStatus()
-    {                        
-        var status            = Storage.getValue(STATUS);
+    {
+		var app = Application.getApp();
+    	                        
+        var status            = app.getProperty(Weather.STATUS);
         var darkSkyApiKey     = Properties.getValue(Graphomatic.darkSkyApiKey);
-        var darkSkyApiKeyPrev = Storage.getValue(APIKEY);
+        var darkSkyApiKeyPrev = app.getProperty(Weather.APIKEY);
 
         var trigger = false;
         
@@ -95,6 +100,7 @@ module Weather
                     break;                    
             }
         }
+        
         if (darkSkyApiKey != null && darkSkyApiKeyPrev != null && !darkSkyApiKey.equals(darkSkyApiKeyPrev))
         {
             trigger = true;
@@ -102,8 +108,8 @@ module Weather
         
         if (trigger)
         {
-            Storage.setValue(APIKEY, darkSkyApiKey);
-            Storage.setValue(STATUS, ER_WAIT);
+            app.setProperty(APIKEY, darkSkyApiKey);
+            app.setProperty(STATUS, ER_WAIT);
             triggerBgProc();
         }    
     }
@@ -114,12 +120,14 @@ module Weather
         {
             return;
         }
-                
+
+		var app = Application.getApp();
+
         var connectionError = null;
         
         if (data instanceof Toybox.Lang.Number)
         {
-            Storage.setValue(STATUS, data);
+            app.setProperty(STATUS, data);
             
             Background.deleteTemporalEvent();
             System.println("BG Process is suspended");
@@ -141,10 +149,10 @@ module Weather
         }      
         else 
         {
-            if (Storage.getValue(STATUS) != ER_OK)
+            if (app.getProperty(STATUS) != ER_OK)
             {
                 enableBgProc();
-                Storage.setValue(STATUS, ER_OK);
+                app.setProperty(STATUS, ER_OK);
             }
 
             if (data instanceof Toybox.Lang.String)
@@ -153,14 +161,16 @@ module Weather
             }        
             else
             {                           
-                Storage.setValue(DATA1, data);            
-                Storage.setValue(TIME, Time.now().value());
+                app.setProperty(DATA1, data);            
+                app.setProperty(TIME, Time.now().value());
                 
                 System.println("Weather data are available");        
                 //System.println(data);              
             }
         }
         
-        Storage.setValue(Weather.ERROR, connectionError);
+        app.setProperty(Weather.ERROR, connectionError);
+        
+        WatchUi.requestUpdate();
     }          
 }

@@ -1,4 +1,3 @@
-using Toybox.Application.Storage;
 using Toybox.WatchUi as Ui;
 
 class WeatherChartModel
@@ -102,10 +101,12 @@ class WeatherChart
     }  
 
     function isUpdateNeeded()
-    {    
-        var dataTime = Storage.getValue(Weather.TIME);
-        var error = Storage.getValue(Weather.ERROR);
-        var status = Storage.getValue(Weather.STATUS);
+    {
+    		var app = Application.getApp();
+        
+        var dataTime = app.getProperty(Weather.TIME);
+        var error = app.getProperty(Weather.ERROR);
+        var status = app.getProperty(Weather.STATUS);
     
         var now = Time.now().value();
         var hourTime = now - now % 3600;
@@ -133,13 +134,15 @@ class WeatherChart
 
     function draw(dc, pos)
     {
-        drawnDataTime = Storage.getValue(Weather.TIME);
+    		var app = Application.getApp();
+    
+        drawnDataTime = app.getProperty(Weather.TIME);
     
         var now = Time.now().value();
         drawnHourTime = now - now % 3600;            
     
-        drawnStatus = Storage.getValue(Weather.STATUS);
-        drawnError = Storage.getValue(Weather.ERROR);
+        drawnStatus = app.getProperty(Weather.STATUS);
+        drawnError = app.getProperty(Weather.ERROR);
             
         var model = getModel();
         
@@ -183,13 +186,15 @@ class WeatherChart
     }    
     
     function getModel()
-    {            
+    {
+		var app = Application.getApp();
+                
         var model = new WeatherChartModel();
         
-        model.communicationError = Storage.getValue(Weather.ERROR);
-        model.status             = Storage.getValue(Weather.STATUS);
+        model.communicationError = app.getProperty(Weather.ERROR);
+        model.status             = app.getProperty(Weather.STATUS);
             
-        var data = Storage.getValue(Weather.DATA1);
+        var data = app.getProperty(Weather.DATA1);
         
         if (data == null)
         {        

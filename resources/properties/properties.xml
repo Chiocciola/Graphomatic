@@ -2,9 +2,12 @@
     <property id="appVersion" type="string">2.3.1</property>
     <property id="ShowAmPm" type="boolean">false</property>
     <property id="ShowSeconds" type="boolean">false</property>
-    <property id="Graph1Type" type="number">4</property>    
-    <property id="Graph2Type" type="number">1</property>
-    <property id="Graph3Type" type="number">0</property>
+    <property id="Graph1Type1" type="number">4</property>    
+    <property id="Graph2Type1" type="number">1</property>
+    <property id="Graph3Type1" type="number">0</property>
+    <property id="Graph1Type2" type="number">4</property>    
+    <property id="Graph2Type2" type="number">2</property>
+    <property id="Graph3Type2" type="number">1</property>    
     <property id="DurationDefault" type="number">4</property>
     <property id="DurationPressure" type="number">6</property>
 	<property id="GraphStyle" type="number">0</property>

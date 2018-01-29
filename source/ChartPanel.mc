@@ -111,12 +111,14 @@ class ChartPanel extends Toybox.WatchUi.Drawable
     
     function layout(dc)
     {
-        chartDescrs[1].hours = Application.getApp().getProperty("DurationDefault");
+    		var app = Application.getApp();
+    
+        chartDescrs[1].hours = app.getProperty("DurationDefault");
         chartDescrs[2].hours = 0;
-        chartDescrs[3].hours = Application.getApp().getProperty("DurationPressure");
+        chartDescrs[3].hours = app.getProperty("DurationPressure");
         
-        chartDescrs[2].color = Application.getApp().getProperty("ColorElevation");
-        chartDescrs[3].color = Application.getApp().getProperty("ColorPressure");        
+        chartDescrs[2].color = app.getProperty("ColorElevation");
+        chartDescrs[3].color = app.getProperty("ColorPressure");        
 
         for (var i=1; i <= 3; i++)
         {
@@ -125,9 +127,9 @@ class ChartPanel extends Toybox.WatchUi.Drawable
             if (chartDescrs[i].hours ==  0) { chartDescrs[i].hours = chartDescrs[1].hours; }                                    
         }
 
-        chartType[0] = Application.getApp().getProperty(Graphomatic.graph1Type);            
-        chartType[1] = Application.getApp().getProperty(Graphomatic.graph2Type);        
-        chartType[2] = Application.getApp().getProperty(Graphomatic.graph3Type);
+        chartType[0] = app.getProperty(Graphomatic.graph1Type);            
+        chartType[1] = app.getProperty(Graphomatic.graph2Type);        
+        chartType[2] = app.getProperty(Graphomatic.graph3Type);
         
         if (chartType[1] == Graphomatic.NONE)
         {

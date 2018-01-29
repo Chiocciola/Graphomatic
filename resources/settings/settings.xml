@@ -4,7 +4,7 @@
         <settingConfig type="alphaNumeric" readonly="true" />
     </setting>
 
-    <setting propertyKey="@Properties.Graph1Type" title="@Strings.Graph1TypeTitle">
+    <setting propertyKey="@Properties.Graph1Type1" title="@Strings.Graph1TypeTitle">
         <settingConfig type="list">
             <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
             <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
@@ -13,7 +13,7 @@
         </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.Graph2Type" title="@Strings.Graph2TypeTitle">
+    <setting propertyKey="@Properties.Graph2Type1" title="@Strings.Graph2TypeTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.GraphTypeVal0</listEntry>
             <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
@@ -23,7 +23,7 @@
         </settingConfig>
     </setting>
     
-    <setting propertyKey="@Properties.Graph3Type" title="@Strings.Graph3TypeTitle">
+    <setting propertyKey="@Properties.Graph3Type1" title="@Strings.Graph3TypeTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.GraphTypeVal0</listEntry>
             <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
@@ -31,7 +31,36 @@
             <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
             <listEntry value="4">@Strings.GraphTypeVal4</listEntry> 
         </settingConfig>
-    </setting>    
+    </setting>
+    
+    <setting propertyKey="@Properties.Graph1Type2" title="@Strings.Graph1TypeTitle">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
+            <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
+            <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
+            <listEntry value="4">@Strings.GraphTypeVal4</listEntry>  
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.Graph2Type2" title="@Strings.Graph2TypeTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.GraphTypeVal0</listEntry>
+            <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
+            <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
+            <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
+            <listEntry value="4">@Strings.GraphTypeVal4</listEntry>  
+        </settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.Graph3Type2" title="@Strings.Graph3TypeTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.GraphTypeVal0</listEntry>
+            <listEntry value="1">@Strings.GraphTypeVal1</listEntry>
+            <listEntry value="2">@Strings.GraphTypeVal2</listEntry>
+            <listEntry value="3">@Strings.GraphTypeVal3</listEntry>
+            <listEntry value="4">@Strings.GraphTypeVal4</listEntry> 
+        </settingConfig>
+    </setting>        
 
     <setting propertyKey="@Properties.ShowAmPm" title="@Strings.ShowAmPm">
         <settingConfig type="boolean" />
