@@ -18,13 +18,13 @@ class WatchFaceTestView extends Toybox.WatchUi.WatchFace
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-        //$.fastDraw = true;
-        Weather.checkBgProcStatus();        
+        //$.fastDraw = true;        
     }
 
     // Update the view
     function onUpdate(dc)
     {
+    	Weather.checkBgProcStatus();
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);       
     }

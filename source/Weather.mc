@@ -94,7 +94,6 @@ module Weather
     
         var status            = app.getProperty(STATUS);
         var darkSkyApiKey     = app.getProperty(Graphomatic.darkSkyApiKey);
-        var darkSkyApiKeyPrev = app.getProperty(APIKEY);
 
         var trigger = false;
         
@@ -108,12 +107,14 @@ module Weather
             {
                 case ER_WAIT:
                     var lastTime1 = Background.getLastTemporalEventTime();
-                    trigger = lastTime1 == null || Time.now().subtract(lastTime1).value() > FIVE_MINUTES.value();
+                    var delta1 = lastTime1 == null ? -1 : Time.now().subtract(lastTime1).value();                    
+                    trigger = delta1 < 0 || delta1 > FIVE_MINUTES.value();
                     break;
 
                 case ER_OK:
                     var lastTime = Background.getLastTemporalEventTime();
-                    trigger = lastTime == null || Time.now().value() - lastTime.value() > ONE_HOUR.value();
+                    var delta = lastTime == null ? -1 : Time.now().value() - lastTime.value();
+                    trigger =  delta < 0 || delta > ONE_HOUR.value();
                     break;
             
                 case ER_NO_CONNECTION:
@@ -133,10 +134,16 @@ module Weather
                     break;                    
             }
         }
-        if (darkSkyApiKey != null && darkSkyApiKeyPrev != null && !darkSkyApiKey.equals(darkSkyApiKeyPrev))
+        
+        if (!trigger)
         {
-            trigger = true;
-        }
+            var darkSkyApiKeyPrev = app.getProperty(APIKEY);
+        
+        	if (darkSkyApiKey != null && darkSkyApiKeyPrev != null && !darkSkyApiKey.equals(darkSkyApiKeyPrev))
+        	{
+            	trigger = true;
+        	}
+    	}
         
         if (trigger)
         {
