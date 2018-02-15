@@ -6,7 +6,7 @@
 ### Fixed 
  - Weather: try to resolve update freeze, experienced by some users
 
-## [2.3.1] - 2017-10-16
+## [2.3.1] - 2017-11-29
 ### Fixed
 - Weather: fixed DarkSky key setting. Put your own DarkSky key in setting in order to avoid 403 error.
 
