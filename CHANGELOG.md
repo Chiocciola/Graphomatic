@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3.2] - 2018-01-19
+### Added
+ - Weather: better weather update management
+### Fixed 
+ - Weather: try to resolve update freeze, experienced by some users
+
+## [2.3.1] - 2017-10-16
+### Fixed
+- Weather: fixed DarkSky key setting. Put your own DarkSky key in setting in order to avoid 403 error.
+
 ## [2.3.0] - 2017-10-16
 ### Added
 - Weather: icons. Enabled when 1st graph in Single or Dual mode
